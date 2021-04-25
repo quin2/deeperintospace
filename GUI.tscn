@@ -1,0 +1,145 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://GUI.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/8bitOperatorPlus-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/art/energySphere.png" type="Texture" id=3]
+[ext_resource path="res://assets/music/riff_riff.mp3" type="AudioStream" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 25
+font_data = ExtResource( 2 )
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource( 1 )
+loadingBarLength = 592
+
+[node name="help" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -376.0
+margin_top = -104.0
+margin_right = -217.0
+margin_bottom = -8.0
+custom_fonts/font = SubResource( 1 )
+text = "help"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="score" type="Label" parent="."]
+margin_right = 78.0
+margin_bottom = 90.0
+custom_fonts/font = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="message" type="Label" parent="."]
+margin_left = 400.0
+margin_top = 356.0
+margin_right = 1016.0
+margin_bottom = 446.0
+custom_fonts/font = SubResource( 2 )
+text = "deeper into space"
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="start" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -208.0
+margin_top = -104.0
+margin_right = -10.0
+margin_bottom = -8.0
+custom_fonts/font = SubResource( 1 )
+text = "start"
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="messageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="tutorial" type="Label" parent="." groups=[
+"testgroup",
+]]
+visible = false
+margin_right = 890.0
+margin_bottom = 153.0
+custom_fonts/font = SubResource( 3 )
+text = "you are a probe, sent far into deep space 
+to find new forms of life
+don't run into any astorids or suns!
+collect the hydrogen to refuel your thrusters
+[LEFT ARROW/[RIGHT ARROW]: rotate
+[SPACE]: fire thrusters"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tutorialOK" type="Button" parent="." groups=[
+"testgroup",
+]]
+visible = false
+margin_left = 8.0
+margin_top = 232.0
+margin_right = 56.0
+margin_bottom = 274.0
+custom_fonts/font = SubResource( 3 )
+text = "ok!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="juiceBar" type="Polygon2D" parent="." groups=[
+"gameOverlay",
+]]
+visible = false
+position = Vector2( 104, -80 )
+color = Color( 0.733333, 0.0745098, 0.0745098, 1 )
+polygon = PoolVector2Array( 112, 88, 112, 112, 704, 112, 704, 88 )
+
+[node name="juiceIcon" type="Sprite" parent="."]
+visible = false
+position = Vector2( 196, 20 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="soundStatus" type="Button" parent="."]
+visible = false
+margin_left = 880.0
+margin_top = 8.0
+margin_right = 1017.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 3 )
+text = "sound off"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+
+[connection signal="pressed" from="help" to="." method="_on_help_pressed"]
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
+[connection signal="timeout" from="messageTimer" to="." method="_on_messageTimer_timeout"]
+[connection signal="pressed" from="tutorialOK" to="." method="_on_tutorialOK_pressed"]
+[connection signal="pressed" from="soundStatus" to="." method="_on_soundStatus_pressed"]

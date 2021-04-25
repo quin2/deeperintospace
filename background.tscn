@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/art/spaceBG.png" type="Texture" id=1]
+[ext_resource path="res://background.gd" type="Script" id=2]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+script = ExtResource( 2 )
+
+[node name="spaceLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 2048, 0 )
+
+[node name="Sprite" type="Sprite" parent="spaceLayer"]
+
+[node name="spaceBG" type="Sprite" parent="spaceLayer/Sprite"]
+position = Vector2( 1024, 300 )
+texture = ExtResource( 1 )
